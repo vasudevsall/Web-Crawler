@@ -14,7 +14,7 @@
 * Do not use very large number of threads (workers) as that might compromise the speed (because of synchronization)
 
 ## Sample image of the project is given below:
-![sample example](https://github.com/vasudevsall/Web-Crawler/tree/master/images/sample.png)
+![sample example](https://github.com/vasudevsall/Web-Crawler/blob/master/images/sample.png?raw=true)
 
 #### General information of the project:
 * Project is created only using JAVA and some HTML and open-source CSS framework [bulma](https://bulma.io/)
