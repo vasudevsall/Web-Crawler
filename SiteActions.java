@@ -25,6 +25,19 @@ public class SiteActions {
     private static int maxDepth;
     private static int maxTime;
     private static int activeWorkers;
+    private static int maxWorkers;
+
+    public static int getNoSitesToParse(){
+        return siteQueue.size();
+    }
+
+    public static void setMaxWorkers(int maxWorkers1){
+        maxWorkers = maxWorkers1;
+    }
+
+    public static int getMaxWorkers() {
+        return maxWorkers;
+    }
 
     public static void setMaxDepth(int maxDepth1){
         maxDepth = maxDepth1;
@@ -92,6 +105,10 @@ public class SiteActions {
 
     public synchronized static void workerDown() {
         activeWorkers = activeWorkers - 1;
+    }
+
+    public synchronized static void workerUp() {
+        activeWorkers = activeWorkers + 1;
     }
 
     public static String getSiteData(String url){
