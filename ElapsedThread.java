@@ -58,12 +58,26 @@ public class ElapsedThread extends Thread {
                 exit = true;
             }
 
-            if(currentActive != SiteActions.getActiveWorkers()){    // Display the number of currently active workers
+            if(currentActive != SiteActions.getActiveWorkers()) {    // Display the number of currently active workers
                 currentActive = SiteActions.getActiveWorkers();
-                if(currentActive == 0)
+                if (currentActive == 0) {
                     exit = true;
+                }
                 activeWorkers.setText(Integer.toString(currentActive));
             }
+
+            //If there are enough sites for all the workers then,
+            //restart all the workers that went down
+            int numToStart = SiteActions.getMaxWorkers() - currentActive;
+            if(SiteActions.getNoSitesToParse() >= numToStart) {
+                for(int i=0; i<numToStart; i++) {
+                    Worker newWorker = new Worker(runButton, this, activeWorkers);
+                    newWorker.start();
+                    SiteActions.workerUp();
+                }
+                activeWorkers.setText(Integer.toString(SiteActions.getActiveWorkers()));
+            }
+
 
             if(secondsPassed < 10)
                 elapsedLabel.setText(String.format("%d:0%d",displayMinutes, secondsPassed));
@@ -71,6 +85,7 @@ public class ElapsedThread extends Thread {
                 elapsedLabel.setText(String.format("%d:%d",displayMinutes, secondsPassed));
         }
         runButton.setSelected(false);
+        System.out.println("Timer Out");
     }
 
     public void stopThread(){

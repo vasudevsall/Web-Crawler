@@ -148,6 +148,7 @@ public class WebCrawler extends JFrame {
                         int numWorkers = Integer.parseInt(workersField.getText());
                         if(numWorkers<=0)
                             numWorkers = 1;
+                        SiteActions.setMaxWorkers(numWorkers);
 
                         if(depthCheck.isSelected()) {
                             SiteActions.setMaxDepth(Integer.parseInt(depthNumber.getText()));

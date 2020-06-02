@@ -23,6 +23,7 @@ public class Worker extends Thread {
 
     @Override
     public void run() {
+        System.out.println(getName());
         int depth = 0;
         ArrayList<String> sites;
         int noSites = 0;
@@ -64,6 +65,9 @@ public class Worker extends Thread {
             }
 
             String title = SiteActions.getTitle(siteData);
+
+            if(title.equals(""))
+                continue;
 
             SiteActions.putSite(url, title);
 
